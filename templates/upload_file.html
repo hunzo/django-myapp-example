@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card my-4">
+    <div class="card-header">
+        <h3>CSV Check</h3>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-danger mt-2">Check</button>
+        </form>
+
+        {% if data != None %}
+        <ul class="mt-4">
+            <li>
+                <strong>FileName: </strong> {{ file_name }}
+            </li>
+            <li>
+                <strong>FileEncode: </strong> {{ file_encode }}
+            </li>
+
+
+        </ul>
+        <table class="table mt-2">
+            <thead>
+                <tr>
+                    <th>Line</th>
+                    <th>Email Address</th>
+                    <th>Error Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.line }}</td>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.error }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endif %}
+
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add Mail</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button type="submit">Submit</button>
+</form>
+
+<ul>
+    {% for i in data %}
+    <li>
+        {{ i.id }} - {{ i.email }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
